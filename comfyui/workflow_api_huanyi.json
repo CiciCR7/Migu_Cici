@@ -1,0 +1,226 @@
+{
+  "10": {
+    "inputs": {
+      "image": "微信图片_20241022182147.png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Target Person"
+    }
+  },
+  "11": {
+    "inputs": {
+      "image": "微信图片_20241022104859.jpg",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Reference Garment"
+    }
+  },
+  "12": {
+    "inputs": {
+      "catvton_path": "zhengchong/CatVTON"
+    },
+    "class_type": "LoadAutoMasker",
+    "_meta": {
+      "title": "Load AutoMask Generator"
+    }
+  },
+  "13": {
+    "inputs": {
+      "cloth_type": "overall",
+      "pipe": [
+        "12",
+        0
+      ],
+      "target_image": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "AutoMasker",
+    "_meta": {
+      "title": "Auto Mask Generation"
+    }
+  },
+  "14": {
+    "inputs": {
+      "images": [
+        "13",
+        1
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Masked Target"
+    }
+  },
+  "15": {
+    "inputs": {
+      "images": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Binary Mask"
+    }
+  },
+  "17": {
+    "inputs": {
+      "sd15_inpaint_path": "runwayml/stable-diffusion-inpainting",
+      "catvton_path": "zhengchong/CatVTON",
+      "mixed_precision": "fp16"
+    },
+    "class_type": "LoadCatVTONPipeline",
+    "_meta": {
+      "title": "Load CatVTON Pipeline"
+    }
+  },
+  "18": {
+    "inputs": {
+      "images": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "40": {
+    "inputs": {
+      "images": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "42": {
+    "inputs": {
+      "sam_model": "sam_vit_h (2.56GB)",
+      "grounding_dino_model": "GroundingDINO_SwinT_OGC (694MB)",
+      "threshold": 0.3,
+      "detail_method": "VITMatte",
+      "detail_erode": 8,
+      "detail_dilate": 12,
+      "black_point": 0.15,
+      "white_point": 0.99,
+      "process_detail": true,
+      "prompt": "dress",
+      "device": "cuda",
+      "max_megapixels": 2,
+      "cache_model": true,
+      "image": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "LayerMask: SegmentAnythingUltra V2",
+    "_meta": {
+      "title": "LayerMask: SegmentAnythingUltra V2"
+    }
+  },
+  "43": {
+    "inputs": {
+      "images": [
+        "42",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "50": {
+    "inputs": {
+      "garment_description": "white dress",
+      "negative_prompt": "",
+      "width": 720,
+      "height": 1280,
+      "num_inference_steps": 30,
+      "guidance_scale": 2.5,
+      "strength": 1,
+      "seed": 42,
+      "pipeline": [
+        "51",
+        0
+      ],
+      "human_img": [
+        "10",
+        0
+      ],
+      "pose_img": [
+        "10",
+        0
+      ],
+      "mask_img": [
+        "54",
+        0
+      ],
+      "garment_img": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "IDM-VTON",
+    "_meta": {
+      "title": "Run IDM-VTON Inference"
+    }
+  },
+  "51": {
+    "inputs": {
+      "weight_dtype": "float16"
+    },
+    "class_type": "PipelineLoader",
+    "_meta": {
+      "title": "Load IDM-VTON Pipeline"
+    }
+  },
+  "54": {
+    "inputs": {
+      "mask": [
+        "42",
+        1
+      ]
+    },
+    "class_type": "MaskToImage",
+    "_meta": {
+      "title": "Convert Mask to Image"
+    }
+  },
+  "55": {
+    "inputs": {
+      "images": [
+        "54",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "56": {
+    "inputs": {
+      "filename_prefix": "IDM-VTON/ComfyUI",
+      "images": [
+        "50",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  }
+}
