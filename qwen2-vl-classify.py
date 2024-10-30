@@ -1,3 +1,4 @@
+# 给图片进行场景打标
 import os
 import torch
 import argparse
