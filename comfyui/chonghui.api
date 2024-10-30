@@ -1,0 +1,142 @@
+{
+  "3": {
+    "inputs": {
+      "seed": 680800322619852,
+      "steps": 25,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 0.5,
+      "model": [
+        "133",
+        0
+      ],
+      "positive": [
+        "39",
+        0
+      ],
+      "negative": [
+        "40",
+        0
+      ],
+      "latent_image": [
+        "126",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "3",
+        0
+      ],
+      "vae": [
+        "128",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "39": {
+    "inputs": {
+      "text": "nice Asian girl,white dress,HD,masterpiece",
+      "clip": [
+        "136",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "40": {
+    "inputs": {
+      "text": "bad hands,bad fingers,(words, characters,text:1.5)NSFW,lowres,(low quality:1.3),(worst quality:1.3),(monochrome:0.8),(deformed:1.3),(malformed hands:1.4),(poorly drawn hands:1.4),(mutated fingers:1.4),(bad anatomy:1.3),(extra limbs:1.35),(poorly drawn face:1.4),(signature:1.2),(artist name:1.2),(watermark:1.2),(beard:0.2),body hair,(big chest)",
+      "clip": [
+        "136",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "109": {
+    "inputs": {
+      "image": "ComfyUI_temp_pkyku_00001_.png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "125": {
+    "inputs": {
+      "filename_prefix": "IDM-VTON-chonghui/ComfyUI",
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "126": {
+    "inputs": {
+      "pixels": [
+        "109",
+        0
+      ],
+      "vae": [
+        "128",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "128": {
+    "inputs": {
+      "vae_name": "ae.sft"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "133": {
+    "inputs": {
+      "unet_name": "flux1-dev.sft",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load Diffusion Model"
+    }
+  },
+  "136": {
+    "inputs": {
+      "clip_name": "clip/model.safetensors",
+      "type": "sd3"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load CLIP"
+    }
+  }
+}
